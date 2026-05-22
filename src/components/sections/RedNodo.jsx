@@ -54,131 +54,281 @@ function ProducerCard({ producer, delay }) {
     <Reveal delay={delay}>
       <article
         className="producer-card"
+        onClick={() => {
+          if (producer.instagram) {
+            window.open(
+              producer.instagram,
+              "_blank",
+              "noopener,noreferrer"
+            );
+          }
+        }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         style={{
-          border: `1px solid ${hovered ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.07)'}`,
+          cursor: producer.instagram ? "pointer" : "default",
+
+          border: `1px solid ${
+            hovered
+              ? "rgba(255,255,255,0.18)"
+              : "rgba(255,255,255,0.07)"
+          }`,
+
           borderRadius: 4,
-          overflow: 'hidden',
-          transform: hovered ? 'translateY(-5px)' : 'translateY(0)',
-          transition: 'border-color 0.4s cubic-bezier(0.16,1,0.3,1), transform 0.4s cubic-bezier(0.16,1,0.3,1)',
+
+          overflow: "hidden",
+
+          transform: hovered
+            ? "translateY(-8px) scale(1.01)"
+            : "translateY(0) scale(1)",
+
+          boxShadow: hovered
+            ? "0 24px 80px rgba(0,0,0,0.45)"
+            : "0 0 0 rgba(0,0,0,0)",
+
+          transition:
+            "border-color 0.4s cubic-bezier(0.16,1,0.3,1), transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s cubic-bezier(0.16,1,0.3,1)",
         }}
       >
-        {/* Image area */}
         {producer.image ? (
           <img
             src={producer.image}
             alt={producer.alias}
-            style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', display: 'block' }}
+            style={{
+              width: "100%",
+              aspectRatio: "4/3",
+              objectFit: "cover",
+              display: "block",
+            }}
           />
         ) : (
           <AvatarPlaceholder alias={producer.alias} />
         )}
 
-        {/* Card body */}
-        <div style={{ padding: 'clamp(20px, 2vw, 28px)' }}>
-          {/* Top row: alias + availability */}
-          <div
+        <div style={{ padding: "clamp(20px, 2vw, 28px)" }}>
+          <h3
             style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'flex-start',
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(18px, 1.8vw, 22px)",
+              fontWeight: 700,
+              letterSpacing: "-0.01em",
+              color: "var(--white)",
               marginBottom: 10,
             }}
           >
-            <h3
-              style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(18px, 1.8vw, 22px)',
-                fontWeight: 700,
-                letterSpacing: '-0.01em',
-                color: 'var(--white)',
-              }}
-            >
-              {producer.alias}
-            </h3>
-            <span
-              style={{
-                fontSize: 10,
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                color: producer.available
-                  ? 'rgba(144,238,144,0.7)'
-                  : 'rgba(244,243,239,0.2)',
-                fontFamily: 'var(--font-body)',
-                paddingTop: 4,
-              }}
-            >
-              {producer.available ? '● disponible' : '○ ocupado'}
-            </span>
-          </div>
+            {producer.alias}
+          </h3>
 
-          {/* Role + location */}
           <p
             style={{
-              fontFamily: 'var(--font-body)',
+              fontFamily: "var(--font-body)",
               fontSize: 12,
-              color: 'rgba(244,243,239,0.35)',
-              letterSpacing: '0.04em',
+              color: "rgba(244,243,239,0.35)",
+              letterSpacing: "0.04em",
               marginBottom: 16,
             }}
           >
             {producer.role} · {producer.location}
           </p>
 
-          {/* Mood */}
-          <p
-            style={{
-              fontFamily: 'var(--font-body)',
-              fontSize: 13,
-              fontWeight: 300,
-              fontStyle: 'italic',
-              color: 'rgba(244,243,239,0.45)',
-              lineHeight: 1.5,
-              marginBottom: 20,
-            }}
-          >
-            "{producer.mood}"
-          </p>
-
-          {/* Separator */}
-          <div style={{ height: 1, background: 'rgba(255,255,255,0.06)', marginBottom: 16 }} />
-
-          {/* Genres + credits */}
           <div
             style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              gap: 8,
-              flexWrap: 'wrap',
+              display: "flex",
+              gap: 6,
+              flexWrap: "wrap",
+              marginBottom: 18,
             }}
           >
-            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-              {producer.genres.map((g) => (
-                <span key={g} className="tag" style={{ fontSize: 9, padding: '3px 9px' }}>
-                  {g}
-                </span>
-              ))}
-            </div>
-            <span
+            {producer.services?.map((service) => (
+              <span
+                key={service}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 6,
+                  padding: "5px 10px",
+                  borderRadius: 999,
+                  border: "1px solid rgba(144,238,144,0.18)",
+                  background: "rgba(144,238,144,0.05)",
+                  color: "rgba(220,255,220,0.92)",
+                  fontSize: 10,
+                  letterSpacing: "0.04em",
+                  textTransform: "uppercase",
+                  fontFamily: "var(--font-body)",
+                }}
+              >
+                <span
+                  style={{
+                    width: 5,
+                    height: 5,
+                    borderRadius: "50%",
+                    background: "#90EE90",
+                  }}
+                />
+
+                {service}
+              </span>
+            ))}
+          </div>
+
+          <div
+            style={{
+              height: 1,
+              background: "rgba(255,255,255,0.06)",
+              marginBottom: 16,
+            }}
+          />
+
+          <div
+            style={{
+              display: "flex",
+              gap: 6,
+              flexWrap: "wrap",
+              marginBottom: 16,
+            }}
+          >
+            {producer.genres.map((g) => (
+              <span
+                key={g}
+                style={{
+                  fontSize: 10,
+                  padding: "5px 10px",
+                  borderRadius: 999,
+                  border: "1px solid rgba(255,255,255,0.12)",
+                  background: "rgba(255,255,255,0.04)",
+                  color: "rgba(244,243,239,0.88)",
+                  fontFamily: "var(--font-body)",
+                  letterSpacing: "0.03em",
+                  textTransform: "uppercase",
+                }}
+              >
+                {g}
+              </span>
+            ))}
+          </div>
+
+          {producer.works?.length > 0 && (
+            <div
               style={{
-                fontFamily: 'var(--font-body)',
-                fontSize: 11,
-                color: 'rgba(244,243,239,0.22)',
-                letterSpacing: '0.02em',
-                whiteSpace: 'nowrap',
+                display: "grid",
+                gap: 0,
+                maxHeight: hovered ? 180 : 0,
+                opacity: hovered ? 1 : 0,
+                overflow: "hidden",
+                transition:
+                  "max-height 0.45s cubic-bezier(0.16,1,0.3,1), opacity 0.35s ease",
               }}
             >
-              {producer.credits}
-            </span>
-          </div>
+              <div
+                style={{
+                  fontFamily: "var(--font-body)",
+                  fontSize: 10,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  color: "rgba(244,243,239,0.28)",
+                  marginBottom: 8,
+                  paddingTop: 4,
+                }}
+              >
+                Trabajos destacados
+              </div>
+
+              {producer.works.map((work) => (
+                <a
+                  key={work.title}
+                  href={work.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    gap: 16,
+                    padding: "12px 0",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    borderRadius: 6,
+                    textDecoration: "none",
+                    color: "rgba(244,243,239,0.82)",
+                    fontFamily: "var(--font-body)",
+                    transition: "all 0.25s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.paddingLeft = "10px";
+                    e.currentTarget.style.background =
+                      "rgba(144,238,144,0.035)";
+                    e.currentTarget.style.color = "var(--white)";
+                    e.currentTarget.style.borderTopColor =
+                      "rgba(144,238,144,0.18)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.paddingLeft = "0px";
+                    e.currentTarget.style.background = "transparent";
+                    e.currentTarget.style.color =
+                      "rgba(244,243,239,0.82)";
+                    e.currentTarget.style.borderTopColor =
+                      "rgba(255,255,255,0.06)";
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 10,
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: 4,
+                        height: 4,
+                        borderRadius: "50%",
+                        background: "#90EE90",
+                        opacity: 0.55,
+                      }}
+                    />
+
+                    <div>
+                      <div
+                        style={{
+                          fontSize: 13,
+                          fontWeight: 500,
+                          letterSpacing: "-0.01em",
+                        }}
+                      >
+                        {work.title}
+                      </div>
+
+                      <div
+                        style={{
+                          fontSize: 10,
+                          color: "rgba(244,243,239,0.32)",
+                          marginTop: 2,
+                          textTransform: "uppercase",
+                          letterSpacing: "0.08em",
+                        }}
+                      >
+                        {work.type}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    style={{
+                      color: "rgba(244,243,239,0.25)",
+                      fontSize: 14,
+                    }}
+                  >
+                    ↗
+                  </div>
+                </a>
+              ))}
+            </div>
+          )}
         </div>
       </article>
     </Reveal>
   );
 }
-
 export default function RedNodo() {
   const [activeFilter, setActiveFilter] = useState('Todos');
 

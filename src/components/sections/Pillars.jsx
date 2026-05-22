@@ -1,4 +1,5 @@
 'use client';
+
 import Reveal from '@/components/ui/Reveal';
 import { pillars } from '@/content';
 
@@ -12,7 +13,6 @@ export default function Pillars() {
       }}
     >
       <div className="container">
-        {/* Section label row */}
         <Reveal>
           <div
             style={{
@@ -29,13 +29,12 @@ export default function Pillars() {
           </div>
         </Reveal>
 
-        {/* 3 pillars grid */}
         <div
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '1px',
-            background: 'rgba(255,255,255,0.07)',
+            gap: 0,
+            background: 'transparent',
           }}
         >
           {pillars.map((pillar, i) => (
@@ -48,9 +47,10 @@ export default function Pillars() {
                   flexDirection: 'column',
                   gap: 24,
                   minHeight: 280,
+                  borderLeft:
+                    i === 0 ? 'none' : '1px solid rgba(255,255,255,0.07)',
                 }}
               >
-                {/* Index */}
                 <span
                   style={{
                     fontFamily: 'var(--font-body)',
@@ -62,7 +62,6 @@ export default function Pillars() {
                   {pillar.index}
                 </span>
 
-                {/* Title */}
                 <h3
                   className="text-heading"
                   style={{ color: 'var(--white)', flex: 1 }}
@@ -70,7 +69,6 @@ export default function Pillars() {
                   {pillar.title}
                 </h3>
 
-                {/* Description */}
                 <p
                   style={{
                     fontFamily: 'var(--font-body)',
@@ -83,7 +81,6 @@ export default function Pillars() {
                   {pillar.description}
                 </p>
 
-                {/* Tags */}
                 <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                   {pillar.tags.map((tag) => (
                     <span key={tag} className="tag" style={{ fontSize: 10 }}>
@@ -96,8 +93,6 @@ export default function Pillars() {
           ))}
         </div>
       </div>
-
-      
     </section>
   );
 }

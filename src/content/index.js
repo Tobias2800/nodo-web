@@ -25,16 +25,15 @@ export const nav = {
     href: "#contacto",
   },
 };
-
 export const hero = {
-  eyebrow: "Buenos Aires · Est. 2019",
-  headline: ["INFRAESTRUCTURA", "CREATIVA."],
-  subline: "Para artistas que construyen desde adentro.",
+  eyebrow: "BUENOS AIRES · 2026",
+  headline: ["RED CREATIVA", "PARA ARTISTAS."],
+  subline:
+    "Producción musical, sesiones y una red seleccionada de productores para construir sonido con dirección real.",
   cta: {
     primary: { label: "Explorar la red →", href: "#red-nodo" },
     secondary: { label: "Nuestros trabajos", href: "#trabajos" },
   },
-  scrollLabel: "scroll",
 };
 
 export const manifesto = {
@@ -74,170 +73,372 @@ export const pillars = [
 
 export const services = {
   id: "servicios",
-  eyebrow: "Lo que construimos contigo",
-  title: "Servicios",
+
+  eyebrow: "Infraestructura creativa para artistas que buscan desarrollar un sonido propio.",
+
+  title: "Servicios NODO",
+
   items: [
     {
-      title: "Producción musical",
+      title: "Producción completa",
+
       description:
-        "Desde la idea hasta el master. Trabajamos con productores especializados en el género de cada artista.",
-      tags: ["Trap", "R&B", "Pop", "Drill", "Afrobeat", "Experimental"],
+        "Desde la idea hasta el master. Beat, producción, grabación, dirección sonora, mezcla y master en un mismo proceso.",
+
+      tags: [
+        "Beat",
+        "Grabación",
+        "Producción",
+        "Mix",
+        "Master",
+      ],
     },
+
     {
-      title: "Dirección artística",
+      title: "Producción presencial",
+
       description:
-        "Concepto, estética y narrativa. Construimos la identidad visual y sonora del proyecto de forma integral.",
-      tags: ["Concepto", "Imagen", "Narrativa"],
+        "Sesiones en estudio enfocadas en construir el sonido del proyecto en tiempo real junto al productor.",
+
+      tags: [
+        "Estudio",
+        "Sesión",
+        "Dirección",
+        "Workflow",
+      ],
     },
+
     {
-      title: "Mezcla y masterización",
+      title: "Producción online",
+
       description:
-        "Procesamiento profesional con ingenieros que entienden el sonido contemporáneo.",
-      tags: ["Mixing", "Mastering", "Stem mixing"],
+        "Producción a distancia para artistas de cualquier parte del mundo. Revisiones, feedback y trabajo remoto internacional.",
+
+      tags: [
+        "Online",
+        "Remoto",
+        "Feedback",
+        "Internacional",
+      ],
     },
+
     {
-      title: "Identidad sonora",
+      title: "Mix & master",
+
       description:
-        "Desarrollo del universo sonoro propio. Firmas, texturas y referencias que definen el sello del artista.",
-      tags: ["Sound design", "Branding", "References"],
+        "Mezcla y masterización profesional adaptada al sonido contemporáneo y a plataformas digitales.",
+
+      tags: [
+        "Mixing",
+        "Mastering",
+        "Stem mix",
+        "Streaming",
+      ],
     },
+
     {
-      title: "Visual creative direction",
+      title: "Beats & catálogo",
+
       description:
-        "Arte de tapa, sesiones fotográficas, video. La imagen como extensión del sonido.",
-      tags: ["Cover art", "Video", "Fotografía"],
+        "Beats exclusivos y no exclusivos. Entrega en mp3, wav o stems según la licencia seleccionada.",
+
+      tags: [
+        "Beats",
+        "Licencias",
+        "WAV",
+        "Stems",
+      ],
     },
   ],
 };
-
 export const redNodo = {
   id: "red-nodo",
+
   eyebrow: "Red Nodo — Productores",
+
   title: "Acceso a la red.",
+
   subtitle:
-    "No es una lista. Es una estructura curada. Cada productor tiene una identidad, un enfoque y un proceso.",
-  filters: ["Todos", "Trap / Drill", "R&B / Soul", "Pop / Electro", "Experimental"],
+    "Productores curados con identidad, criterio y sonido propio.",
+
+  filters: [
+    "Todos",
+    "Trap / Drill",
+    "R&B / Soul",
+    "Pop / Electro",
+    "Experimental",
+  ],
+
   producers: [
     {
-      id: "prod-01",
-      alias: "TANO",
-      role: "Productor",
-      location: "Buenos Aires",
-      genres: ["Trap", "Drill"],
-      filter: "Trap / Drill",
-      mood: "Oscuro. Denso. Arquitectónico.",
-      credits: "12 releases · 2M streams",
-      available: true,
-      image: null, // placeholder — replace with real image path
-    },
+  id: "deo-911",
+  alias: "DEO 9:11",
+
+  role: "Productor · Ingeniero",
+
+  location: "Buenos Aires",
+
+  instagram: "https://www.instagram.com/tadedolezor/",
+
+  genres: ["Trap", "Reggaetón", "Pop"],
+
+  filter: "Trap / Reggaetón / Pop",
+
+  credits: "Producción completa · Online · Beats",
+
+  services: [
+    "Producción completa",
+    "Producción online",
+    "Beats",
+  ],
+
+  image: "/producers/deo911.jpeg",
+
+  works: [
     {
-      id: "prod-02",
-      alias: "MEVA",
-      role: "Productora",
-      location: "Córdoba",
-      genres: ["R&B", "Soul", "Afrobeat"],
-      filter: "R&B / Soul",
-      mood: "Cálido. Rítmico. Emocional.",
-      credits: "8 releases · 1.4M streams",
-      available: true,
-      image: null,
+      title: "DISAM — TOBI",
+      type: "Producción",
+      link: "https://www.youtube.com/watch?v=Ot6PJlz7QZE&list=RDOt6PJlz7QZE&start_radio=1",
     },
+
     {
-      id: "prod-03",
-      alias: "CERO",
-      role: "Productor",
-      location: "Buenos Aires",
-      genres: ["Pop", "Electro"],
-      filter: "Pop / Electro",
-      mood: "Limpio. Contemporáneo. Expansivo.",
-      credits: "20 releases · 5.2M streams",
-      available: false,
-      image: null,
-    },
-    {
-      id: "prod-04",
-      alias: "FARO",
-      role: "Productor",
-      location: "Rosario",
-      genres: ["Experimental", "Ambient"],
-      filter: "Experimental",
-      mood: "Extraño. Cinematic. Profundo.",
-      credits: "6 releases · 800K streams",
-      available: true,
-      image: null,
-    },
-    {
-      id: "prod-05",
-      alias: "LUKE",
-      role: "Productor",
-      location: "Buenos Aires",
-      genres: ["Trap", "Latin"],
-      filter: "Trap / Drill",
-      mood: "Intenso. Urgente. Callejero.",
-      credits: "15 releases · 3.8M streams",
-      available: true,
-      image: null,
-    },
-    {
-      id: "prod-06",
-      alias: "SIA",
-      role: "Productora",
-      location: "Mendoza",
-      genres: ["R&B", "Pop"],
-      filter: "R&B / Soul",
-      mood: "Suave. Íntimo. Sofisticado.",
-      credits: "10 releases · 2.1M streams",
-      available: true,
-      image: null,
+      title: "A PRUEBA — TOBI",
+      type: "Producción",
+      link: "https://www.youtube.com/watch?v=Vhhl0dJHFco&list=RDVhhl0dJHFco&start_radio=1",
     },
   ],
-};
+},
+    {
+  id: "mozart",
+  alias: "MOZART MUZIK",
 
+  role: "Productor",
+
+  location: "Buenos Aires",
+
+  instagram: "https://www.instagram.com/mozartmuzik/",
+
+  genres: ["Hip Hop", "Trap", "Reggaetón", "Pop"],
+
+  filter: "Hip Hop / Trap / Reggaetón / Pop",
+
+  credits: "Producción completa · Online · Beats",
+
+  services: [
+    "Producción completa",
+    "Producción online",
+    "Beats",
+  ],
+
+  image: "/producers/mozart.jpeg",
+
+  works: [
+    {
+      title: "HIELO — ELADIO CARRION, JHAYCO",
+      type: "Producción",
+      link: "https://www.youtube.com/watch?v=a7QwwvwKdkg&list=RDa7QwwvwKdkg&start_radio=1",
+    },
+
+    {
+      title: "FABULOSO — SECH, JUSTIN QUILES",
+      type: "Producción",
+      link: "https://www.youtube.com/watch?v=SfzCpA2Fbpw&list=RDSfzCpA2Fbpw&start_radio=1",
+    },
+  ],
+},
+    {
+  id: "raz",
+  alias: "RAZ",
+
+  role: "Productor",
+
+  location: "Lima, Perú",
+
+  instagram: "https://www.instagram.com/raz.vsnry/",
+
+  genres: ["Trap", "R&B", "Plug", "Dancehall"],
+
+  filter: "Trap / R&B / Plug / Dancehall",
+
+  credits: "Producción completa · Online · Beats",
+
+  services: [
+    "Producción completa",
+    "Producción online",
+    "Beats",
+  ],
+
+  image: "/producers/raz.jpeg",
+
+  works: [
+    {
+      title: "CUANDO QUIERAS — RCMARCK, ZUHK",
+      type: "Producción",
+      link: "https://www.youtube.com/watch?si=m_arS6QVKPOzcxfO&v=fggSPE6KtmI&feature=youtu.be",
+    },
+
+    {
+      title: "COMBINAMO — TOBI, ZUHK",
+      type: "Producción",
+      link: "https://www.youtube.com/watch?v=bS3fjIQYBLg&list=RDbS3fjIQYBLg&start_radio=1",
+    },
+  ],
+},
+   {
+  id: "donnie-darko",
+  alias: "DONNIE DARKO",
+
+  role: "Productor",
+
+  location: "Buenos Aires",
+
+instagram: "https://www.instagram.com/donniedarko499/",
+
+  genres: ["Trap", "Reggaetón"],
+
+  filter: "Trap / Reggaetón",
+
+  credits: "Producción completa · Online · Beats",
+
+  services: [
+    "Producción completa",
+    "Producción online",
+    "Beats",
+  ],
+
+  image: "/producers/donniedarko.jpeg",
+
+  works: [
+    {
+      title: "QUE NOS PASÓ — BLAGH, SEVEN KAYNE, KHEA",
+      type: "Producción",
+      link: "https://www.youtube.com/watch?v=dKURKiDRSFE&list=RDdKURKiDRSFE&start_radio=1",
+    },
+
+    {
+      title: "NI SE NOTA — LUCHO SSJ, C.R.O",
+      type: "Producción",
+      link: "https://www.youtube.com/watch?si=0s3OEtEzMxj2mDGE&v=hxydwVLQm4M&feature=youtu.be",
+    },
+  ],
+},
+    {
+  id: "sinnombre",
+  alias: "SINNOMBRE",
+
+  role: "Productor · Ingeniero",
+
+  location: "Buenos Aires",
+
+  instagram: "https://www.instagram.com/sinnombre.299/",
+
+  genres: ["Trap", "Pop", "Alternativo"],
+
+  filter: "Trap / Pop / Alternativo",
+
+  credits: "Producción completa · Online · Beats",
+
+  services: [
+    "Producción completa",
+    "Producción online",
+    "Beats",
+  ],
+
+  image: "/producers/sinnombre.jpeg",
+
+  works: [
+    {
+      title: "CHANTAS — VALUTO",
+      type: "Producción",
+      link: "https://www.youtube.com/watch?v=G1c3z-lIcxo&list=RDG1c3z-lIcxo&start_radio=1",
+    },
+
+    {
+      title: "IMANES — JUGO",
+      type: "Producción",
+      link: "https://www.youtube.com/watch?v=ZKDSzLe99Xs&list=RDZKDSzLe99Xs&start_radio=1",
+    },
+  ],
+},
+    {
+  id: "oubial",
+  alias: "OUBIAL",
+  role: "Productor",
+instagram: "https://www.instagram.com/oubi4l/",
+
+  location: "Buenos Aires",
+  genres: ["Trap", "Pop", "Alternativo"],
+  filter: "Trap / Pop / Alternativo",
+  credits: "Beats",
+  services: ["Beats"],
+  image: "/producers/oubial.jpeg",
+  works: [
+    {
+      title: "PUEDE QUE NO — RAFAEL COCOA",
+      type: "Beat",
+      link: "https://open.spotify.com/intl-es/track/4sBXsWpOFT2JJGtKRDvJBS?si=gBRrSyEpQh-MlRadQ9wwMA&nd=1&dlsi=67dd0cece744405e",
+    },
+    {
+      title: "ME QUEDÓ GRANDE TU LUGAR — VENTRIP",
+      type: "Beat",
+      link: "https://open.spotify.com/intl-es/track/2MucHf1xSn1DLxV71ylwJ5?si=aCLZavl6RdOrjRNWk_MOkg",
+    },
+  ],
+},
+  ],
+};
 export const works = {
   id: "trabajos",
+
   eyebrow: "Trabajos seleccionados",
+
   title: "Lo que construimos.",
-  cta: { label: "Ver todos los trabajos →", href: "#" },
+
+  cta: {
+    label: "Ver todos los trabajos →",
+    href: "#contacto",
+  },
+
   items: [
     {
-      id: "work-01",
-      artist: "CORRO BEVERLY",
-      title: "A cada mal",
-      type: "Producción · Mezcla",
-      year: "2024",
-      genre: "Trap",
-      image: null,
-      spotify: "#",
+      title: "METAMORFOSIS",
+      artist: "TOBI",
+      producer: "DEO 9:11",
+      role: "Mix vocal",
+      type: "Álbum",
+      tracks: ["POPPIN", "CHYEAH", "SANGRE DOLEZOR", "ANTIMATERIA", "VIVIR ES UN ARTE"],
+      image: "/works/metamorfosis.jpeg",
+      link: "https://www.youtube.com/watch?v=JAyX7a-ZJY8&list=OLAK5uy_nXSa8Yo1bAUgt79bOGstKuODaJSECtFjg",
     },
     {
-      id: "work-02",
-      artist: "MAEL",
-      title: "Sombra de luz",
-      type: "Dirección artística · Producción",
-      year: "2024",
-      genre: "R&B",
-      image: null,
-      spotify: "#",
+      title: "CERO GRADOS",
+      artist: "TOBI",
+      producer: "DEO 9:11",
+      role: "Mix",
+      type: "Álbum",
+      tracks: ["SI TE SENTÍS SOLA FT. POISON KID", "FALSAS PROMESAS", "TEMPLO", "HENNESSY FT. KNAK"],
+      image: "/works/cerogrados.jpeg",
+      link: "https://www.youtube.com/watch?v=l7otS5T0ekM&list=OLAK5uy_maM2t7h8jrELoPylo0cYpGQxZJCXLLHxg",
     },
     {
-      id: "work-03",
-      artist: "VERO S.",
-      title: "Marea",
-      type: "Identidad sonora · Visual",
-      year: "2023",
-      genre: "Pop",
-      image: null,
-      spotify: "#",
+      title: "NUBE 3",
+      artist: "TOBI",
+      producer: "DEO 9:11",
+      role: "Mix",
+      type: "Álbum",
+      tracks: [],
+      image: "/works/nube3.jpeg",
+      link: "https://www.youtube.com/watch?v=YWWe-mv5hYY&list=OLAK5uy_lKFz4J4hiATJdx5ySfn4yhmO3KL0198Gc",
     },
     {
-      id: "work-04",
-      artist: "DOBLE K",
-      title: "Sistema",
-      type: "Producción · Masterización",
-      year: "2023",
-      genre: "Experimental",
-      image: null,
-      spotify: "#",
+      title: "QUIEN VA A SER",
+      artist: "TOBI",
+      producer: "DEO 9:11",
+      role: "Mix",
+      type: "Single",
+      tracks: [],
+      image: "/works/quienvaaser.jpeg",
+      link: "https://www.youtube.com/watch?v=sdvjrTLx4uM&list=OLAK5uy_lKM_3zbaAWHoGVkk7zMt7DgFmT4pzLCS8",
     },
   ],
 };

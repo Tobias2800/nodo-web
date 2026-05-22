@@ -116,10 +116,23 @@ function ServiceRow({ item, index, isOpen, onToggle }) {
             }}
           >
             {item.tags.map((tag) => (
-              <span key={tag} className="tag tag-light" style={{ fontSize: 10 }}>
-                {tag}
-              </span>
-            ))}
+  <span
+    key={tag}
+    className="tag tag-light"
+    style={{
+      fontSize: 11,
+      padding: '7px 14px',
+      borderRadius: 999,
+      border: '1px solid rgba(0,0,0,0.12)',
+      background: 'rgba(0,0,0,0.03)',
+      color: 'rgba(0,0,0,0.82)',
+      fontWeight: 500,
+      letterSpacing: '0.05em',
+    }}
+  >
+    {tag}
+  </span>
+))}
           </div>
         </div>
       </div>
@@ -197,7 +210,7 @@ export default function Services() {
         </div>
       </div>
 
-      
+      npm run dev
     </section>
   );
 }

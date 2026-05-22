@@ -1,4 +1,5 @@
 'use client';
+
 import { useEffect, useState } from 'react';
 import { hero } from '@/content';
 
@@ -6,7 +7,6 @@ export default function Hero() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // slight delay for cinematic entrance
     const t = setTimeout(() => setMounted(true), 80);
     return () => clearTimeout(t);
   }, []);
@@ -30,15 +30,11 @@ export default function Hero() {
         overflow: 'hidden',
       }}
     >
-      {/* Subtle ambient gradient */}
       <div
         aria-hidden="true"
         style={{
           position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
+          inset: 0,
           background:
             'radial-gradient(ellipse 60% 40% at 20% 50%, rgba(255,255,255,0.022) 0%, transparent 70%)',
           pointerEvents: 'none',
@@ -46,7 +42,6 @@ export default function Hero() {
         }}
       />
 
-      {/* Horizontal rule — top of content area */}
       <div
         aria-hidden="true"
         style={{
@@ -62,7 +57,6 @@ export default function Hero() {
         }}
       />
 
-      {/* Main content */}
       <div
         className="container"
         style={{
@@ -72,26 +66,22 @@ export default function Hero() {
           paddingTop: 120,
         }}
       >
-        {/* Eyebrow */}
         <p
           className="text-label"
           style={{
             marginBottom: 40,
             opacity: mounted ? 1 : 0,
             transform: mounted ? 'none' : 'translateY(16px)',
-            transition: 'opacity 0.8s var(--ease-out) 0.1s, transform 0.8s var(--ease-out) 0.1s',
+            transition:
+              'opacity 0.8s var(--ease-out) 0.1s, transform 0.8s var(--ease-out) 0.1s',
           }}
         >
           {hero.eyebrow}
         </p>
 
-        {/* Display headline */}
         <div style={{ overflow: 'hidden', marginBottom: 32 }}>
           {hero.headline.map((line, i) => (
-            <div
-              key={line}
-              style={{ overflow: 'hidden', lineHeight: 0.9 }}
-            >
+            <div key={line} style={{ overflow: 'hidden', lineHeight: 0.9 }}>
               <h1
                 className="text-display-xl"
                 style={{
@@ -100,7 +90,7 @@ export default function Hero() {
                   opacity: mounted ? 1 : 0,
                   transform: mounted ? 'none' : 'translateY(100%)',
                   transition: `opacity 1s var(--ease-out) ${0.2 + i * 0.1}s,
-                               transform 1s var(--ease-out) ${0.2 + i * 0.1}s`,
+                    transform 1s var(--ease-out) ${0.2 + i * 0.1}s`,
                   paddingBottom: '0.05em',
                 }}
               >
@@ -110,7 +100,6 @@ export default function Hero() {
           ))}
         </div>
 
-        {/* Subline + CTAs row */}
         <div
           style={{
             display: 'flex',
@@ -120,7 +109,8 @@ export default function Hero() {
             gap: 32,
             opacity: mounted ? 1 : 0,
             transform: mounted ? 'none' : 'translateY(20px)',
-            transition: 'opacity 0.9s var(--ease-out) 0.5s, transform 0.9s var(--ease-out) 0.5s',
+            transition:
+              'opacity 0.9s var(--ease-out) 0.5s, transform 0.9s var(--ease-out) 0.5s',
           }}
         >
           <p
@@ -130,24 +120,38 @@ export default function Hero() {
               fontWeight: 300,
               color: 'rgba(244,243,239,0.5)',
               letterSpacing: '0.01em',
-              maxWidth: 380,
+              maxWidth: 520,
             }}
           >
             {hero.subline}
           </p>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 16,
+              flexWrap: 'wrap',
+            }}
+          >
             <a
               href={hero.cta.primary.href}
-              onClick={(e) => { e.preventDefault(); handleScroll(hero.cta.primary.href); }}
+              onClick={(e) => {
+                e.preventDefault();
+                handleScroll(hero.cta.primary.href);
+              }}
               className="btn btn-outline"
               style={{ fontSize: 13 }}
             >
               {hero.cta.primary.label}
             </a>
+
             <a
               href={hero.cta.secondary.href}
-              onClick={(e) => { e.preventDefault(); handleScroll(hero.cta.secondary.href); }}
+              onClick={(e) => {
+                e.preventDefault();
+                handleScroll(hero.cta.secondary.href);
+              }}
               style={{
                 fontFamily: 'var(--font-body)',
                 fontSize: 13,
@@ -155,56 +159,18 @@ export default function Hero() {
                 textDecoration: 'none',
                 transition: 'color 0.2s',
               }}
-              onMouseEnter={(e) => (e.target.style.color = 'var(--white)')}
-              onMouseLeave={(e) => (e.target.style.color = 'rgba(244,243,239,0.4)')}
+              onMouseEnter={(e) => {
+                e.target.style.color = 'var(--white)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.color = 'rgba(244,243,239,0.4)';
+              }}
             >
               {hero.cta.secondary.label}
             </a>
           </div>
         </div>
-
-        {/* Scroll indicator */}
-        <div
-          style={{
-            position: 'absolute',
-            right: 'var(--container-px)',
-            bottom: 'clamp(56px, 7vw, 96px)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: 10,
-            opacity: mounted ? 0.35 : 0,
-            transition: 'opacity 1s ease 1.2s',
-          }}
-        >
-          <div
-            style={{
-              width: 1,
-              height: 40,
-              background: 'var(--white)',
-              animation: 'scrollPulse 2s ease-in-out infinite',
-            }}
-          />
-          <span
-            style={{
-              fontFamily: 'var(--font-body)',
-              fontSize: 10,
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase',
-              color: 'var(--white)',
-              writingMode: 'vertical-rl',
-            }}
-          >
-            {hero.scrollLabel}
-          </span>
-        </div>
       </div>
-
-      <style>{`
-        @keyframes scrollPulse {
-          0%, 100% { transform: scaleY(1); opacity: 1; }
-          50% { transform: scaleY(0.6); opacity: 0.4; }
-        }
-      `}</style>
     </section>
   );
 }
