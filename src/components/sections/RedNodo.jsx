@@ -273,11 +273,11 @@ function ProducerCard({ producer, delay }) {
       display: "grid",
       gap: 0,
       maxHeight:
-        (window.innerWidth <= 640 ? expanded : hovered)
+        (typeof window !== "undefined" && window.innerWidth <= 640 ? expanded : hovered)
           ? 220
           : 0,
       opacity:
-        (window.innerWidth <= 640 ? expanded : hovered)
+        (typeof window !== "undefined" && window.innerWidth <= 640 ? expanded : hovered)
           ? 1
           : 0,
       overflow: "hidden",
