@@ -88,14 +88,15 @@ export default function Footer() {
                       key={link.label}
                       href={link.href}
                       style={{
-                        fontFamily: 'var(--font-body)',
-                        fontSize: 14,
-                        fontWeight: 300,
-                        color: 'rgba(244,243,239,0.45)',
-                        textDecoration: 'none',
-                        transition: 'color 0.2s',
-                        width: 'fit-content',
-                      }}
+  fontFamily: 'var(--font-body)',
+  fontSize: 14,
+  fontWeight: 300,
+  color: 'rgba(244,243,239,0.45)',
+  textDecoration: 'none',
+  transition: 'color 0.2s',
+  width: '100%',
+  overflowWrap: 'anywhere',
+}}
                       onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--white)')}
                       onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(244,243,239,0.45)')}
                     >

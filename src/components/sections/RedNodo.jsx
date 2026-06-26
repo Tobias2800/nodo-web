@@ -49,43 +49,43 @@ function AvatarPlaceholder({ alias }) {
 
 function ProducerCard({ producer, delay }) {
   const [hovered, setHovered] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+
+  const openInstagram = () => {
+    if (producer.instagram) {
+      window.open(producer.instagram, "_blank", "noopener,noreferrer");
+    }
+  };
+
+  const isMobile = () =>
+    typeof window !== "undefined" && window.innerWidth <= 640;
 
   return (
     <Reveal delay={delay}>
       <article
         className="producer-card"
         onClick={() => {
-          if (producer.instagram) {
-            window.open(
-              producer.instagram,
-              "_blank",
-              "noopener,noreferrer"
-            );
+          if (!isMobile()) {
+            openInstagram();
           }
         }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         style={{
           cursor: producer.instagram ? "pointer" : "default",
-
           border: `1px solid ${
             hovered
               ? "rgba(255,255,255,0.18)"
               : "rgba(255,255,255,0.07)"
           }`,
-
           borderRadius: 4,
-
           overflow: "hidden",
-
           transform: hovered
             ? "translateY(-8px) scale(1.01)"
             : "translateY(0) scale(1)",
-
           boxShadow: hovered
             ? "0 24px 80px rgba(0,0,0,0.45)"
             : "0 0 0 rgba(0,0,0,0)",
-
           transition:
             "border-color 0.4s cubic-bezier(0.16,1,0.3,1), transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s cubic-bezier(0.16,1,0.3,1)",
         }}
@@ -165,7 +165,6 @@ function ProducerCard({ producer, delay }) {
                     background: "#90EE90",
                   }}
                 />
-
                 {service}
               </span>
             ))}
@@ -207,18 +206,85 @@ function ProducerCard({ producer, delay }) {
             ))}
           </div>
 
+          <div
+            style={{
+              display: "flex",
+              justifyContent: producer.works?.length > 0 ? "space-between" : "flex-end",
+              alignItems: "center",
+              marginBottom: 14,
+              gap: 16,
+            }}
+          >
+            {producer.works?.length > 0 && (
+              <button
+                className="producer-mobile-toggle"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setExpanded(!expanded);
+                }}
+                style={{
+                  background: "none",
+                  border: "none",
+                  padding: 0,
+                  fontFamily: "var(--font-body)",
+                  fontSize: 11,
+                  letterSpacing: "0.06em",
+                  textTransform: "uppercase",
+                  color: "rgba(244,243,239,0.38)",
+                  cursor: "pointer",
+                  display: "none",
+                }}
+              >
+                {expanded ? "Ocultar trabajos ↑" : "Ver trabajos ↓"}
+              </button>
+            )}
+
+            {producer.instagram && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  openInstagram();
+                }}
+                style={{
+                  background: "none",
+                  border: "none",
+                  padding: 0,
+                  marginLeft: "auto",
+                  fontFamily: "var(--font-body)",
+                  fontSize: 11,
+                  letterSpacing: "0.06em",
+                  textTransform: "uppercase",
+                  color:
+                    hovered || expanded
+                      ? "rgba(244,243,239,0.72)"
+                      : "rgba(244,243,239,0.34)",
+                  transition: "color 0.25s ease",
+                  cursor: "pointer",
+                }}
+              >
+                Ver perfil ↗
+              </button>
+            )}
+          </div>
+
           {producer.works?.length > 0 && (
-            <div
-              style={{
-                display: "grid",
-                gap: 0,
-                maxHeight: hovered ? 180 : 0,
-                opacity: hovered ? 1 : 0,
-                overflow: "hidden",
-                transition:
-                  "max-height 0.45s cubic-bezier(0.16,1,0.3,1), opacity 0.35s ease",
-              }}
-            >
+  <div
+    style={{
+      display: "grid",
+      gap: 0,
+      maxHeight:
+        (window.innerWidth <= 640 ? expanded : hovered)
+          ? 220
+          : 0,
+      opacity:
+        (window.innerWidth <= 640 ? expanded : hovered)
+          ? 1
+          : 0,
+      overflow: "hidden",
+      transition:
+        "max-height 0.45s cubic-bezier(0.16,1,0.3,1), opacity 0.35s ease",
+    }}
+  >
               <div
                 style={{
                   fontFamily: "var(--font-body)",
@@ -264,8 +330,7 @@ function ProducerCard({ producer, delay }) {
                   onMouseLeave={(e) => {
                     e.currentTarget.style.paddingLeft = "0px";
                     e.currentTarget.style.background = "transparent";
-                    e.currentTarget.style.color =
-                      "rgba(244,243,239,0.82)";
+                    e.currentTarget.style.color = "rgba(244,243,239,0.82)";
                     e.currentTarget.style.borderTopColor =
                       "rgba(255,255,255,0.06)";
                   }}
@@ -332,10 +397,19 @@ function ProducerCard({ producer, delay }) {
 export default function RedNodo() {
   const [activeFilter, setActiveFilter] = useState('Todos');
 
-  const filtered =
-    activeFilter === 'Todos'
-      ? redNodo.producers
-      : redNodo.producers.filter((p) => p.filter === activeFilter);
+  const normalize = (text) =>
+  text
+    ?.toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim();
+
+const filtered =
+  activeFilter === "Todos"
+    ? redNodo.producers
+    : redNodo.producers.filter((p) =>
+        p.genres?.some((genre) => normalize(genre) === normalize(activeFilter))
+      );
 
   return (
     <section
@@ -421,21 +495,17 @@ export default function RedNodo() {
           </div>
         </Reveal>
 
-        {/* Producer grid */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: 'clamp(16px, 2vw, 24px)',
-          }}
-        >
+              {/* Producer grid */}
+        <div className="producer-grid">
           {filtered.map((producer, i) => (
-            <ProducerCard key={producer.id} producer={producer} delay={i * 80} />
+            <ProducerCard
+              key={producer.id}
+              producer={producer}
+              delay={i * 80}
+            />
           ))}
         </div>
       </div>
-
-      
     </section>
   );
 }

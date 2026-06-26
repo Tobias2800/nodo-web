@@ -62,7 +62,7 @@ export default function Hero() {
         style={{
           position: 'relative',
           zIndex: 3,
-          paddingBottom: 'clamp(56px, 7vw, 96px)',
+          paddingBottom: 'clamp(96px, 1vw, 180px)',
           paddingTop: 120,
         }}
       >

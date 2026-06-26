@@ -44,7 +44,7 @@ export const manifesto = {
     "de tu sonido.",
   ],
   descriptor:
-    "Una red curada de productores, directores creativos y especialistas en sonido — conectados bajo una sola infraestructura.",
+    "Una red de productores, ingenieros y especialistas en sonido trabajando sobre una misma visión creativa.",
 };
 
 export const pillars = [
@@ -162,12 +162,16 @@ export const redNodo = {
     "Productores curados con identidad, criterio y sonido propio.",
 
   filters: [
-    "Todos",
-    "Trap / Drill",
-    "R&B / Soul",
-    "Pop / Electro",
-    "Experimental",
-  ],
+  "Todos",
+  "Trap",
+  "Reggaetón",
+  "Pop",
+  "Hip Hop",
+  "R&B",
+  "Plug",
+  "Dancehall",
+  "Alternativo",
+],
 
   producers: [
     {
@@ -449,15 +453,14 @@ export const cta = {
   headline: "¿Listo para entrar?",
   subline:
     "La estructura ya está construida. Tu lugar está adentro.",
-  primary: { label: "Escribinos", href: "mailto:hola@nodostudios.com" },
-  secondary: { label: "Instagram", href: "https://instagram.com/nodostudios" },
+  primary: { label: "Reserva tu sesion", href: "https://wa.me/5492944533345?text=Hola,%20quiero%20informaci%C3%B3n%20sobre%20grabar%20en%20NODO" },
+  secondary: { label: "Instagram", href: "https://instagram.com/nodo_studios" },
 };
-
 export const footer = {
   logo: "NODO",
   tagline: "Infraestructura creativa para artistas.",
   location: "Buenos Aires · Argentina",
-  copyright: "© Nodo Studios 2019–2025",
+  copyright: "© Nodo Studios 2026",
   columns: [
     {
       heading: "Explorar",
@@ -471,10 +474,14 @@ export const footer = {
     {
       heading: "Contacto",
       links: [
-        { label: "hola@nodostudios.com", href: "mailto:hola@nodostudios.com" },
-        { label: "Instagram", href: "https://instagram.com/nodostudios" },
-        { label: "Spotify", href: "https://open.spotify.com" },
-        { label: "SoundCloud", href: "https://soundcloud.com" },
+        {
+          label: "nodostudios00@gmail.com",
+          href: "mailto:nodostudios00@gmail.com",
+        },
+        {
+          label: "Instagram",
+          href: "https://instagram.com/nodostudios",
+        },
       ],
     },
   ],

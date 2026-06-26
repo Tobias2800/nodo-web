@@ -218,20 +218,17 @@ export default function Works() {
         </div>
 
         {/* Works grid */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: 'clamp(16px, 2vw, 28px)',
-          }}
-        >
+        <div className="works-grid">
           {works.items.map((item, i) => (
-            <WorkCard key={item.id} item={item} index={i} delay={i * 90} />
+            <WorkCard
+              key={item.id}
+              item={item}
+              index={i}
+              delay={i * 90}
+            />
           ))}
         </div>
       </div>
-
-      
     </section>
   );
 }
