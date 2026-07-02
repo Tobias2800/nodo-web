@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import WelcomeWheel from '@/components/sections/WelcomeWheel';
-import WelcomeTicket from '@/components/sections/WelcomeTicket';
-import WelcomeRetry from '@/components/sections/WelcomeRetry';
+import WelcomeTicket from './WelcomeTicket';
+import WelcomeWheel from './WelcomeWheel';
+import WelcomeRetry from './WelcomeRetry';
 
 const STORAGE_KEY = 'nodo_bienvenida_v1';
 const RETRY_TIME = 23 * 60 * 60 * 1000;
@@ -47,29 +47,31 @@ export default function SpinOffer() {
     setResult(data);
     setStep('ticket');
   }, []);
-  
 
-useEffect(() => {
-  if (step !== "retry" || !result?.canTryAt) return;
+  useEffect(() => {
+    if (step !== 'retry' || !result?.canTryAt) return;
 
-  const updateTimer = () => {
-    const diff = Math.max(0, result.canTryAt - Date.now());
+    const updateTimer = () => {
+      const diff = Math.max(0, result.canTryAt - Date.now());
 
-    const hours = Math.floor(diff / (1000 * 60 * 60));
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
-    const seconds = Math.floor((diff / 1000) % 60);
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
 
-    setRetryLeft(
-      `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`
-    );
-  };
+      setRetryLeft(
+        `${String(hours).padStart(2, '0')}:${String(minutes).padStart(
+          2,
+          '0'
+        )}:${String(seconds).padStart(2, '0')}`
+      );
+    };
 
-  updateTimer();
+    updateTimer();
 
-  const interval = setInterval(updateTimer, 1000);
+    const interval = setInterval(updateTimer, 1000);
 
-  return () => clearInterval(interval);
-}, [step, result]);
+    return () => clearInterval(interval);
+  }, [step, result]);
 
   const spin = () => {
     if (spinning) return;
@@ -79,35 +81,38 @@ useEffect(() => {
 
     const saved = localStorage.getItem(STORAGE_KEY);
     const previous = saved ? JSON.parse(saved) : null;
-    const forcedWin = previous?.type === 'retry' && Date.now() >= previous.canTryAt;
-    const shouldRetry = !forcedWin && Math.floor(Math.random() * 20) === 0;
+    const forcedWin =
+      previous?.type === 'retry' && Date.now() >= previous.canTryAt;
 
-let prize;
+    const shouldRetry =
+      !forcedWin && Math.floor(Math.random() * 20) === 0;
 
-if (!shouldRetry) {
-  prize = {
-    type: 'discount',
-    label: '20% OFF',
-    detail: 'Primera sesión',
-    code: createCode(),
-    expires: getExpiryDate(),
-    createdAt: Date.now(),
-  };
-} else {
-  prize = {
-    type: 'retry',
-    label: 'REINTENTAR',
-    canTryAt: Date.now() + RETRY_TIME,
-    createdAt: Date.now(),
-  };
-}
+    let prize;
 
-   const prizeAngles = {
-  discount: 360,
-  retry: 60,
-};
+    if (!shouldRetry) {
+      prize = {
+        type: 'discount',
+        label: '20% OFF',
+        detail: 'Primera sesión',
+        code: createCode(),
+        expires: getExpiryDate(),
+        createdAt: Date.now(),
+      };
+    } else {
+      prize = {
+        type: 'retry',
+        label: 'REINTENTAR',
+        canTryAt: Date.now() + RETRY_TIME,
+        createdAt: Date.now(),
+      };
+    }
 
-const finalRotation = 360 * 6 + prizeAngles[prize.type];
+    const prizeAngles = {
+      discount: 360,
+      retry: 60,
+    };
+
+    const finalRotation = 360 * 6 + prizeAngles[prize.type];
 
     setRotation(0);
 
@@ -115,7 +120,7 @@ const finalRotation = 360 * 6 + prizeAngles[prize.type];
       setRotation(finalRotation);
     }, 80);
 
-        setTimeout(() => {
+    setTimeout(() => {
       setStep('verifying');
     }, 4800);
 
@@ -128,7 +133,7 @@ const finalRotation = 360 * 6 + prizeAngles[prize.type];
   };
 
   const whatsappText = result
-    ? `Hola Nodo, desbloqueé un beneficio de bienvenida. Mi código es ${result.code} y quiero reservar mi primera sesión.`
+    ? `Hola Nodo, desbloqueé mi Welcome Pass. Código: ${result.code}. Quiero reservar mi primera sesión.`
     : '';
 
   const whatsappUrl = `https://wa.me/5492944533345?text=${encodeURIComponent(
@@ -151,43 +156,27 @@ const finalRotation = 360 * 6 + prizeAngles[prize.type];
             </h1>
 
             <p>
-  Activá tu pase de bienvenida.
-  <br />
-  Disponible por tiempo limitado.
-</p>
+              Activá tu pase de bienvenida.
+              <br />
+              Disponible por tiempo limitado.
+            </p>
 
-            <button onClick={spin}>Comenzar →</button>
+            <button onClick={spin}>Activar acceso →</button>
           </div>
         )}
 
-        {step === 'spin' && (
-  <WelcomeWheel rotation={rotation} />
-)}
-
-{step === 'ticket' && (
-  <WelcomeWheel
-    rotation={rotation}
-    className="wheel-background"
-  />
-)}
+        {step === 'spin' && <WelcomeWheel rotation={rotation} />}
 
         {step === 'verifying' && (
           <div className="welcome-verifying">
-            <p>Verificando...</p>
+            <p>Validando acceso...</p>
           </div>
         )}
 
-                {step === 'retry' && (
-  <WelcomeRetry
-    retryLeft={retryLeft}
-  />
-)}
+        {step === 'retry' && <WelcomeRetry retryLeft={retryLeft} />}
 
         {step === 'ticket' && (
-          <WelcomeTicket
-            result={result}
-            whatsappUrl={whatsappUrl}
-          />
+          <WelcomeTicket result={result} whatsappUrl={whatsappUrl} />
         )}
       </section>
     </main>
