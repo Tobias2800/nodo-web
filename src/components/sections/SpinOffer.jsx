@@ -76,6 +76,14 @@ export default function SpinOffer() {
   const spin = () => {
     if (spinning) return;
 
+    window.gtag?.('event', 'click_welcome_start', {
+      location: 'welcome_gate',
+    });
+
+    window.gtag?.('event', 'wheel_spin', {
+      location: 'welcome_wheel',
+    });
+
     setSpinning(true);
     setStep('spin');
 
@@ -84,8 +92,7 @@ export default function SpinOffer() {
     const forcedWin =
       previous?.type === 'retry' && Date.now() >= previous.canTryAt;
 
-    const shouldRetry =
-      !forcedWin && Math.floor(Math.random() * 20) === 0;
+    const shouldRetry = !forcedWin && Math.floor(Math.random() * 20) === 0;
 
     let prize;
 
@@ -127,6 +134,19 @@ export default function SpinOffer() {
     setTimeout(() => {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(prize));
       setResult(prize);
+
+      if (prize.type === 'retry') {
+        window.gtag?.('event', 'wheel_retry', {
+          location: 'welcome_wheel',
+        });
+      } else {
+        window.gtag?.('event', 'wheel_win', {
+          location: 'welcome_wheel',
+          prize: prize.label,
+          code: prize.code,
+        });
+      }
+
       setStep(prize.type === 'retry' ? 'retry' : 'ticket');
       setSpinning(false);
     }, 5400);

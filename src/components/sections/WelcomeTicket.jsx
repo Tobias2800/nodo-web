@@ -21,9 +21,10 @@ export default function WelcomeTicket({ result, whatsappUrl }) {
           <span>CÓDIGO</span>
           <strong>{result.code}</strong>
         </div>
+
         <p className="ticket-note">
-  Este código se valida al confirmar tu reserva.
-</p>
+          Este código se valida al confirmar tu reserva.
+        </p>
 
         <div className="ticket-meta">
           <span>EXPIRA</span>
@@ -33,7 +34,18 @@ export default function WelcomeTicket({ result, whatsappUrl }) {
 
       <p className="ticket-part">Tu pase quedó activo.</p>
 
-      <a href={whatsappUrl} target="_blank" rel="noreferrer">
+      <a
+        href={whatsappUrl}
+        target="_blank"
+        rel="noreferrer"
+        onClick={() => {
+          window.gtag?.('event', 'click_whatsapp', {
+            location: 'promo_20off',
+            coupon: result.code,
+            discount: result.label,
+          });
+        }}
+      >
         Reservar primera sesión →
       </a>
     </div>
