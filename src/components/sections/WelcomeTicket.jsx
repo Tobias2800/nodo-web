@@ -1,6 +1,20 @@
 export default function WelcomeTicket({ result, whatsappUrl }) {
   if (!result) return null;
 
+  const handleWhatsAppClick = (e) => {
+    e.preventDefault();
+
+    window.gtag?.('event', 'click_whatsapp', {
+      location: 'promo_20off',
+      coupon: result.code,
+      discount: result.label,
+    });
+
+    setTimeout(() => {
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    }, 150);
+  };
+
   return (
     <div className="welcome-ticket-wrap">
       <p className="ticket-unlocked">Acceso desbloqueado.</p>
@@ -37,14 +51,8 @@ export default function WelcomeTicket({ result, whatsappUrl }) {
       <a
         href={whatsappUrl}
         target="_blank"
-        rel="noreferrer"
-        onClick={() => {
-          window.gtag?.('event', 'click_whatsapp', {
-            location: 'promo_20off',
-            coupon: result.code,
-            discount: result.label,
-          });
-        }}
+        rel="noopener noreferrer"
+        onClick={handleWhatsAppClick}
       >
         Reservar primera sesión →
       </a>
