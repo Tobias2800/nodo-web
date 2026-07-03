@@ -1,6 +1,7 @@
 import '../styles/globals.css';
 import { meta } from '@/content';
 import { Analytics } from '@vercel/analytics/next';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 export const metadata = {
   title: meta.title,
@@ -34,9 +35,10 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
-  {children}
-  <Analytics />
-</body>
+        {children}
+        <Analytics />
+        <GoogleAnalytics gaId="G-BSDEN1E2YJ" />
+      </body>
     </html>
   );
 }
