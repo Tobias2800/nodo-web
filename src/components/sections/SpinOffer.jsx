@@ -92,27 +92,27 @@ export default function SpinOffer() {
     const forcedWin =
       previous?.type === 'retry' && Date.now() >= previous.canTryAt;
 
-    const shouldRetry = true;
+    const shouldRetry = !forcedWin && Math.floor(Math.random() * 20) === 0;
 
     let prize;
 
-    if (false) {
-  prize = {
-    type: 'discount',
-    label: '20% OFF',
-    detail: 'Primera sesión',
-    code: createCode(),
-    expires: getExpiryDate(),
-    createdAt: Date.now(),
-  };
-} else {
-  prize = {
-    type: 'retry',
-    label: 'REINTENTAR',
-    canTryAt: Date.now() + RETRY_TIME,
-    createdAt: Date.now(),
-  };
-}
+    if (!shouldRetry) {
+      prize = {
+        type: 'discount',
+        label: '20% OFF',
+        detail: 'Primera sesión',
+        code: createCode(),
+        expires: getExpiryDate(),
+        createdAt: Date.now(),
+      };
+    } else {
+      prize = {
+        type: 'retry',
+        label: 'REINTENTAR',
+        canTryAt: Date.now() + RETRY_TIME,
+        createdAt: Date.now(),
+      };
+    }
 
     const prizeAngles = {
       discount: 360,
